@@ -17,18 +17,18 @@ import software.amazon.awssdk.services.ssm.model.ParameterVersionNotFoundExcepti
 
 internal object AwsClientHelper {
     private val systemsManagement = SsmClient.builder()
-            .build()
+        .build()
     private val secretsManager = SecretsManagerClient.builder()
-            .build()
+        .build()
 
     fun getParametersByPath(path: String): Map<String, String> {
         val parameters = mutableMapOf<String, String>()
 
         val request = GetParametersByPathRequest.builder()
-                .path(path)
-                .withDecryption(true)
-                .recursive(true)
-                .build()
+            .path(path)
+            .withDecryption(true)
+            .recursive(true)
+            .build()
 
         try {
             val response = systemsManagement.getParametersByPathPaginator(request)
@@ -58,8 +58,8 @@ internal object AwsClientHelper {
         val response: GetSecretValueResponse
 
         val request = GetSecretValueRequest.builder()
-                .secretId(path)
-                .build()
+            .secretId(path)
+            .build()
 
         try {
             response = secretsManager.getSecretValue(request)
