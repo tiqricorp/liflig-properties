@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>no.liflig</groupId>
+    <artifactId>griid-properties-fetcher</artifactId>
+    <packaging>jar</packaging>
+    <version>${revision}</version>
+
+    <scm>
+        <developerConnection>scm:git:https://github.com/capralifecycle/griid-properties-fetcher.git</developerConnection>
+        <connection>scm:git:https://github.com/capralifecycle/griid-properties-fetcher.git</connection>
+        <url>https://github.com/capralifecycle/griid-properties-fetcher</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <properties>
+        <major-version>1</major-version>
+        <revision>${major-version}.local-SNAPSHOT</revision>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <kotlin.version>1.3.72</kotlin.version>
+        <serialization.version>0.20.0</serialization.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <aws-sdk.version>2.13.20</aws-sdk.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-serialization-runtime</artifactId>
+            <version>${serialization.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-secretsmanager -->
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>secretsmanager</artifactId>
+            <version>${aws-sdk.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-ssm -->
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>ssm</artifactId>
+            <version>${aws-sdk.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-jdk8</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test</artifactId>
+            <version>${kotlin.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
+        <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <systemPropertyVariables>
+                        <aws.region>eu-west-1</aws.region>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin.version}</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirs>
+                                <source>src/main/java</source>
+                                <source>src/main/kotlin</source>
+                            </sourceDirs>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirs>
+                                <source>src/test/java</source>
+                                <source>src/test/kotlin</source>
+                            </sourceDirs>
+                        </configuration>
+                    </execution>
+                </executions>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <configuration>
+                    <args>
+                        <arg>-Xjsr305=strict</arg>
+                    </args>
+                    <jvmTarget>1.8</jvmTarget>
+                    <compilerPlugins>
+                        <plugin>kotlinx-serialization</plugin>
+                    </compilerPlugins>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-maven-serialization</artifactId>
+                        <version>${kotlin.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

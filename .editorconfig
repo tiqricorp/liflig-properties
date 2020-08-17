@@ -1,0 +1,23 @@
+# http://editorconfig.org
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = true
+
+[*.kt]
+indent_size = 4
+
+[*.md]
+# Markdown uses double trailing whitespaces as special chars to force newlines
+trim_trailing_whitespace = false
+
+# Disable Ktlint rules
+# import-ordering: Import layout in idea is currently not supported: https://youtrack.jetbrains.com/issue/KT-10974
+# no-unused-imports: Import aliases mistakenly reported as unused
+disabled_rules = import-ordering,no-unused-imports
