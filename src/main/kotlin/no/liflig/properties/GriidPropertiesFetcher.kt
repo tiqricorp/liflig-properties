@@ -1,7 +1,6 @@
 package no.liflig.properties
 
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
@@ -9,7 +8,7 @@ import java.util.Properties
 
 object GriidPropertiesFetcher {
     private val serializer = JsonElement.serializer()
-    private val json = Json(JsonConfiguration.Stable)
+    private val json = Json {}
 
     @JvmStatic
     fun forPrefix(ssmPrefix: String): Properties =
@@ -33,7 +32,7 @@ object GriidPropertiesFetcher {
             .toMap()
 
     private fun renameKeyAndSerializeValue(jsonSecret: String, baseKey: String): List<Pair<String, String>> =
-        when (val jsonElement = json.parse(serializer, jsonSecret)) {
+        when (val jsonElement = json.decodeFromString(serializer, jsonSecret)) {
             is JsonPrimitive -> listOf(Pair(baseKey, jsonElement.toString()))
             is JsonObject -> serializeJsonObject(jsonElement, baseKey)
             else -> throw IllegalStateException("Secret $baseKey is neither JsonPrimitive nor JsonObject")
