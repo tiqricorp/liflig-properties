@@ -52,7 +52,7 @@
 
     <java.version>1.8</java.version>
     <kotlin.version>1.4.10</kotlin.version>
-    <kotlinx.serialization.runtime.version>1.0-M1-1.4.0-rc</kotlinx.serialization.runtime.version>
+    <kotlinx.serialization.version>1.0.0</kotlinx.serialization.version>
     <ktlint-maven-plugin.version>1.5.2</ktlint-maven-plugin.version>
     <aws-sdk.version>2.13.20</aws-sdk.version>
   </properties>
@@ -60,8 +60,9 @@
   <dependencies>
     <dependency>
       <groupId>org.jetbrains.kotlinx</groupId>
-      <artifactId>kotlinx-serialization-runtime</artifactId>
-      <version>${kotlinx.serialization.runtime.version}</version>
+      <artifactId>kotlinx-serialization-json</artifactId>
+      <version>${kotlinx.serialization.version}</version>
+      <type>pom</type>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-secretsmanager -->
