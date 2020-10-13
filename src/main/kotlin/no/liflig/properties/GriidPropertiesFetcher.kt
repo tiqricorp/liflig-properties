@@ -41,7 +41,7 @@ object GriidPropertiesFetcher {
     private fun serializeJsonObject(jsonElement: JsonObject, baseKey: String): List<Pair<String, String>> =
         jsonElement.entries
             .map { (secretKey, secretValue) ->
-                when(secretValue) {
+                when (secretValue) {
                     is JsonPrimitive -> "$baseKey.$secretKey" to secretValue.content
                     else -> throw IllegalStateException("Invalid value in secret")
                 }
