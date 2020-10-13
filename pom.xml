@@ -52,16 +52,19 @@
 
     <java.version>1.8</java.version>
     <kotlin.version>1.4.10</kotlin.version>
-    <kotlinx.serialization.runtime.version>1.0-M1-1.4.0-rc</kotlinx.serialization.runtime.version>
+    <kotlinx.serialization.version>1.0.0</kotlinx.serialization.version>
     <ktlint-maven-plugin.version>1.5.2</ktlint-maven-plugin.version>
     <aws-sdk.version>2.13.20</aws-sdk.version>
+    <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+    <junit.version>5.7.0</junit.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.jetbrains.kotlinx</groupId>
-      <artifactId>kotlinx-serialization-runtime</artifactId>
-      <version>${kotlinx.serialization.runtime.version}</version>
+      <artifactId>kotlinx-serialization-json</artifactId>
+      <version>${kotlinx.serialization.version}</version>
+      <type>pom</type>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-secretsmanager -->
@@ -88,21 +91,30 @@
       <version>${kotlin.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
     <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
     <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
     <plugins>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
         <configuration>
           <systemPropertyVariables>
             <aws.region>eu-west-1</aws.region>
           </systemPropertyVariables>
         </configuration>
       </plugin>
+
       <plugin>
         <artifactId>kotlin-maven-plugin</artifactId>
         <version>${kotlin.version}</version>
@@ -115,8 +127,7 @@
             </goals>
             <configuration>
               <sourceDirs>
-                <source>src/main/java</source>
-                <source>src/main/kotlin</source>
+                <source>${project.basedir}/src/main/kotlin</source>
               </sourceDirs>
             </configuration>
           </execution>
@@ -128,7 +139,6 @@
             </goals>
             <configuration>
               <sourceDirs>
-                <source>src/test/java</source>
                 <source>src/test/kotlin</source>
               </sourceDirs>
             </configuration>
@@ -152,6 +162,7 @@
           </dependency>
         </dependencies>
       </plugin>
+
       <plugin>
         <groupId>com.github.gantsign.maven</groupId>
         <artifactId>ktlint-maven-plugin</artifactId>
@@ -165,6 +176,7 @@
           </execution>
         </executions>
       </plugin>
+
     </plugins>
   </build>
 
