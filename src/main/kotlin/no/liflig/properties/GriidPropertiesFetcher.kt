@@ -6,11 +6,10 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import java.util.Properties
 
-object GriidPropertiesFetcher {
+class GriidPropertiesFetcher {
     private val serializer = JsonElement.serializer()
     private val json = Json {}
 
-    @JvmStatic
     fun forPrefix(ssmPrefix: String): Properties =
         Properties().apply {
             putAll(parametersByPath(ssmPrefix))
