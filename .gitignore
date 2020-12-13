@@ -44,3 +44,5 @@ target
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+/.flattened-pom.xml

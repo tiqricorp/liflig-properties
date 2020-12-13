@@ -16,21 +16,6 @@
     <tag>HEAD</tag>
   </scm>
 
-  <profiles>
-    <profile>
-      <id>jenkins-build</id>
-      <activation>
-        <property>
-          <name>env.BUILD_NUMBER</name>
-        </property>
-      </activation>
-      <properties>
-        <tag>${major-version}.${env.BUILD_NUMBER}</tag>
-        <revision>${major-version}.${env.BUILD_NUMBER}</revision>
-      </properties>
-    </profile>
-  </profiles>
-
   <distributionManagement>
     <repository>
       <id>capra-releases</id>
@@ -43,8 +28,10 @@
   </distributionManagement>
 
   <properties>
+    <!-- Increment major version for breaking changes -->
     <major-version>1</major-version>
     <revision>${major-version}.local-SNAPSHOT</revision>
+
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -161,6 +148,32 @@
             <version>${kotlin.version}</version>
           </dependency>
         </dependencies>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
+        <version>1.2.5</version>
+        <configuration>
+          <updatePomFile>true</updatePomFile>
+          <flattenMode>resolveCiFriendliesOnly</flattenMode>
+        </configuration>
+        <executions>
+          <execution>
+            <id>flatten</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>flatten</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>flatten.clean</id>
+            <phase>clean</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
 
       <plugin>
