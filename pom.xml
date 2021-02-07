@@ -43,7 +43,7 @@
     <ktlint-maven-plugin.version>1.7.0</ktlint-maven-plugin.version>
     <aws-sdk.version>2.13.20</aws-sdk.version>
     <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
-    <junit.version>5.7.0</junit.version>
+    <junit.version>5.7.1</junit.version>
   </properties>
 
   <dependencies>
