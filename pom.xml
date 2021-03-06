@@ -5,14 +5,14 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>no.liflig</groupId>
-  <artifactId>griid-properties-fetcher</artifactId>
+  <artifactId>properties</artifactId>
   <packaging>jar</packaging>
   <version>${revision}</version>
 
   <scm>
-    <developerConnection>scm:git:https://github.com/capralifecycle/griid-properties-fetcher.git</developerConnection>
-    <connection>scm:git:https://github.com/capralifecycle/griid-properties-fetcher.git</connection>
-    <url>https://github.com/capralifecycle/griid-properties-fetcher</url>
+    <developerConnection>scm:git:https://github.com/capralifecycle/liflig-properties.git</developerConnection>
+    <connection>scm:git:https://github.com/capralifecycle/liflig-properties.git</connection>
+    <url>https://github.com/capralifecycle/liflig-properties</url>
     <tag>HEAD</tag>
   </scm>
 

@@ -1,4 +1,4 @@
-# griid-properties-fetcher
+# liflig-properties
 
 This library is currently only distributed in Liflig
 internal repositories.
