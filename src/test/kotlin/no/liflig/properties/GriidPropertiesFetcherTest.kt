@@ -1,4 +1,5 @@
-import no.liflig.properties.GriidPropertiesFetcher
+package no.liflig.properties
+
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
