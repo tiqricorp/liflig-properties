@@ -32,12 +32,14 @@ internal fun loadPropertiesInternal(
     griidPropertiesFetcher: GriidPropertiesFetcher = GriidPropertiesFetcher(),
     getenv: (String) -> String? = System::getenv
 ) =
-    Properties().apply {
-        putAll(fromClasspath(applicationProperties))
-        putAll(fromParameterStore(griidPropertiesFetcher, getenv))
-        putAll(fromFile(File(overridesProperties)))
-        putAll(fromClasspath(applicationTestProperties))
-    }
+    Properties()
+        .apply {
+            putAll(fromClasspath(applicationProperties))
+            putAll(fromParameterStore(griidPropertiesFetcher, getenv))
+            putAll(fromFile(File(overridesProperties)))
+            putAll(fromClasspath(applicationTestProperties))
+        }
+        .also { logger.info("Loaded ${it.size} properties in total. Keys: ${it.keys}") }
 
 private fun fromParameterStore(
     griidPropertiesFetcher: GriidPropertiesFetcher,
