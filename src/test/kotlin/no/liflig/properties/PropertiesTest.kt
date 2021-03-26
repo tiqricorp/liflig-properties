@@ -28,7 +28,7 @@ class PropertiesTest {
             val exception = assertThrows<IllegalArgumentException> {
                 Properties().stringNotNull("foo")
             }
-            assertEquals("Property 'foo' not found", exception.message)
+            assertEquals("Property 'foo' is either not found or value is empty", exception.message)
         }
 
         @Test
@@ -49,7 +49,7 @@ class PropertiesTest {
             val exception = assertThrows<IllegalArgumentException> {
                 Properties().stringNotEmpty("foo")
             }
-            assertEquals("Property 'foo' not found", exception.message)
+            assertEquals("Property 'foo' is either not found or value is empty", exception.message)
         }
     }
 
@@ -90,7 +90,7 @@ class PropertiesTest {
             val exception = assertThrows<IllegalArgumentException> {
                 Properties().intRequired("foo")
             }
-            assertEquals("Property 'foo' not found", exception.message)
+            assertEquals("Property 'foo' is either not found or value is empty", exception.message)
         }
     }
 
@@ -131,7 +131,7 @@ class PropertiesTest {
             val exception = assertThrows<IllegalArgumentException> {
                 Properties().longRequired("foo")
             }
-            assertEquals("Property 'foo' not found", exception.message)
+            assertEquals("Property 'foo' is either not found or value is empty", exception.message)
         }
     }
 
@@ -159,8 +159,8 @@ class PropertiesTest {
         }
 
         @Test
-        fun `boolean gives false on empty value`() {
-            assertEquals(false, mapOf("foo" to "").toProperties().boolean("foo"))
+        fun `boolean gives null on empty string value`() {
+            assertEquals(null, mapOf("foo" to "").toProperties().boolean("foo"))
         }
 
         @Test
@@ -168,7 +168,7 @@ class PropertiesTest {
             val exception = assertThrows<IllegalArgumentException> {
                 Properties().booleanRequired("foo")
             }
-            assertEquals("Property 'foo' not found", exception.message)
+            assertEquals("Property 'foo' is either not found or value is empty", exception.message)
         }
     }
 }

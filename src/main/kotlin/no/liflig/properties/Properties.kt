@@ -78,21 +78,27 @@ fun Properties.long(key: String): Long? =
 fun Properties.longRequired(key: String): Long = long(key).require(key)
 
 /**
- * Returns `true` if the content of the property given by [key] is equal to the word "true", ignoring case, and `false` otherwise.
+ * Returns `true` if the content of the property given by [key]
+ * is equal to the word "true", ignoring case, and `false` otherwise.
+ * Returns null if property is missing or value is blank.
  */
 @JvmName("getBoolean")
-fun Properties.boolean(key: String): Boolean? = getProperty(key)?.toBoolean()
+fun Properties.boolean(key: String): Boolean? =
+    getProperty(key)
+        ?.takeIf { it.isNotBlank() }
+        ?.toBoolean()
 
 /**
- * Returns `true` if the content of the property given by [key] is equal to the word "true", ignoring case, and `false` otherwise.
- * @throws IllegalArgumentException if the property does not exist.
+ * Returns `true` if the content of the property given by [key]
+ * is equal to the word "true", ignoring case, and `false` otherwise.
+ * @throws IllegalArgumentException if the property is missing or value is blank.
  */
 @JvmName("getBooleanRequired")
 fun Properties.booleanRequired(key: String) = boolean(key).require(key)
 
 private fun <T> T?.require(propertyKey: String): T {
     if (this == null) {
-        throw IllegalArgumentException("Property '$propertyKey' not found")
+        throw IllegalArgumentException("Property '$propertyKey' is either not found or value is empty")
     }
     return this
 }
