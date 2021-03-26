@@ -3,6 +3,12 @@ package no.liflig.properties
 import java.util.Properties
 
 /**
+ * Returns the optional string value of the property given by [key].
+ * returns null if the property does not exist.
+ */
+fun Properties.string(key: String): String? = getProperty(key)
+
+/**
  * Returns the string value of the property given by [key]. It might be an empty string.
  * @throws IllegalArgumentException if the property does not exist.
  */
