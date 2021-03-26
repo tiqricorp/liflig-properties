@@ -30,18 +30,21 @@ fun Properties.stringNotEmpty(key: String): String =
     }
 
 /**
- * Returns the integer value of the property given by [key].
+ * Returns the integer value of the property given by [key]
+ * or null if property does not exist or if string value is blank.
  * @throws IllegalArgumentException if the value is not a valid representation of a number.
  */
 @JvmName("getInt")
 fun Properties.int(key: String): Int? =
-    getProperty(key)?.let {
-        try {
-            it.toInt()
-        } catch (e: NumberFormatException) {
-            throw IllegalArgumentException("Property '$key' contains an invalid integer: '$it'", e)
+    getProperty(key)
+        ?.takeIf { it.isNotBlank() }
+        ?.let {
+            try {
+                it.toInt()
+            } catch (e: NumberFormatException) {
+                throw IllegalArgumentException("Property '$key' contains an invalid integer: '$it'", e)
+            }
         }
-    }
 
 /**
  * Returns the integer value of the property given by [key].
