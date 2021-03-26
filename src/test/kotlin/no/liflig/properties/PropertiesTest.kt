@@ -66,11 +66,8 @@ class PropertiesTest {
         }
 
         @Test
-        fun `int throws on empty value`() {
-            val exception = assertThrows<IllegalArgumentException> {
-                mapOf("foo" to "").toProperties().int("foo")
-            }
-            assertEquals("Property 'foo' contains an invalid integer: ''", exception.message)
+        fun `int gives null on empty string value`() {
+            assertEquals(null, mapOf("foo" to "").toProperties().int("foo"))
         }
 
         @ParameterizedTest
@@ -110,11 +107,8 @@ class PropertiesTest {
         }
 
         @Test
-        fun `long throws on empty value`() {
-            val exception = assertThrows<IllegalArgumentException> {
-                mapOf("foo" to "").toProperties().long("foo")
-            }
-            assertEquals("Property 'foo' contains an invalid long: ''", exception.message)
+        fun `long gives null on empty string value`() {
+            assertEquals(null, mapOf("foo" to "").toProperties().long("foo"))
         }
 
         @ParameterizedTest
