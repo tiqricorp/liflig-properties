@@ -54,17 +54,21 @@ fun Properties.int(key: String): Int? =
 fun Properties.intRequired(key: String): Int = int(key).require(key)
 
 /**
- * Returns the long value of the property given by [key].
+ * Returns the long value of the property given by [key]
+ * or null if property does not exist or if string value is blank.
  * @throws IllegalArgumentException if the value is not a valid representation of a number.
  */
 @JvmName("getLong")
-fun Properties.long(key: String): Long? = getProperty(key)?.let {
-    try {
-        it.toLong()
-    } catch (e: NumberFormatException) {
-        throw IllegalArgumentException("Property '$key' contains an invalid long: '$it'", e)
-    }
-}
+fun Properties.long(key: String): Long? =
+    getProperty(key)
+        ?.takeIf { it.isNotBlank() }
+        ?.let {
+            try {
+                it.toLong()
+            } catch (e: NumberFormatException) {
+                throw IllegalArgumentException("Property '$key' contains an invalid long: '$it'", e)
+            }
+        }
 
 /**
  * Returns the long value of the property given by [key].
