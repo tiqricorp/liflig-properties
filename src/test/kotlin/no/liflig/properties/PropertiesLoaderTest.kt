@@ -49,13 +49,13 @@ class PropertiesLoaderTest {
     fun `an overrides file have precedence over the default application properties`() {
         val properties = loadPropertiesInternal(
             applicationProperties = "testdata/application.properties",
-            overridesProperties = "overrides-for-test.properties"
+            overridesProperties = "test-assets/overrides.properties"
         )
         assertEquals("Morpheus", properties.getProperty("hacker.name"))
     }
 
     @Test
-    fun `test properties have precedence over all other properties`() {
+    fun `test properties have precedence over other properties`() {
         val awsPath = "/construct/current"
         val griidPropertiesFetcher = mockk<GriidPropertiesFetcher> {
             every { forPrefix(awsPath) } returns mapOf("hacker.name" to "Henrik").toProperties()
@@ -64,10 +64,28 @@ class PropertiesLoaderTest {
         val properties = loadPropertiesInternal(
             applicationProperties = "testdata/application.properties",
             applicationTestProperties = "testdata/application-test.properties",
-            overridesProperties = "overrides-for-test.properties",
+            overridesProperties = "test-assets/overrides.properties",
             griidPropertiesFetcher = griidPropertiesFetcher,
             getenv = { awsPath }
         )
         assertEquals("Trinity", properties.getProperty("hacker.name"))
+    }
+
+    @Test
+    fun `test overrides properties have precedence over all other properties`() {
+        val awsPath = "/construct/current"
+        val griidPropertiesFetcher = mockk<GriidPropertiesFetcher> {
+            every { forPrefix(awsPath) } returns mapOf("hacker.name" to "Henrik").toProperties()
+        }
+
+        val properties = loadPropertiesInternal(
+            applicationProperties = "testdata/application.properties",
+            applicationTestProperties = "testdata/application-test.properties",
+            overridesProperties = "test-assets/overrides.properties",
+            overridesTestProperties = "test-assets/overrides-test.properties",
+            griidPropertiesFetcher = griidPropertiesFetcher,
+            getenv = { awsPath }
+        )
+        assertEquals("Dozer", properties.getProperty("hacker.name"))
     }
 }
