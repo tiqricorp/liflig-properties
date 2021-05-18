@@ -16,6 +16,7 @@ private val logger = LoggerFactory.getLogger(PropertiesLoader::class.java)
  * - application.properties (from classpath)
  * - overrides.properties (from working directory)
  * - application-test.properties (from classpath)
+ * - overrides-test.properties (from working directory)
  *
  * If SSM_PREFIX environment variable is given, properties from AWS Parameter Store
  * will be loaded before overrides.properties.
@@ -29,6 +30,7 @@ internal fun loadPropertiesInternal(
     applicationProperties: String = "application.properties",
     applicationTestProperties: String = "application-test.properties",
     overridesProperties: String = "overrides.properties",
+    overridesTestProperties: String = "overrides-test.properties",
     griidPropertiesFetcher: GriidPropertiesFetcher = GriidPropertiesFetcher(),
     getenv: (String) -> String? = System::getenv
 ) =
@@ -38,6 +40,7 @@ internal fun loadPropertiesInternal(
             putAll(fromParameterStore(griidPropertiesFetcher, getenv))
             putAll(fromFile(File(overridesProperties)))
             putAll(fromClasspath(applicationTestProperties))
+            putAll(fromFile(File(overridesTestProperties)))
         }
         .also { logger.info("Loaded ${it.size} properties in total. Keys: ${it.keys}") }
 
