@@ -42,7 +42,7 @@ internal fun loadPropertiesInternal(
             putAll(fromClasspath(applicationTestProperties))
             putAll(fromFile(File(overridesTestProperties)))
         }
-        .also { logger.info("Loaded ${it.size} properties in total. Keys: ${it.keys}") }
+        .also { logger.info("Loaded ${it.size} properties in total") }
 
 private fun fromParameterStore(
     griidPropertiesFetcher: GriidPropertiesFetcher,
@@ -56,7 +56,7 @@ private fun fromParameterStore(
             )
             else -> {
                 putAll(griidPropertiesFetcher.forPrefix(ssmPrefix))
-                logger.info("Loaded $size properties from AWS Parameter Store using prefix [$ssmPrefix]")
+                logger.info("Loaded $size properties from AWS Parameter Store using prefix [$ssmPrefix]. Keys: $keys")
             }
         }
     }
@@ -71,7 +71,7 @@ private fun fromClasspath(filename: String): Properties =
             null -> logger.info("File [$filename] not found on classpath - no properties loaded")
             else -> {
                 resource.reader().use(::load)
-                logger.info("Loaded $size properties from [$filename] on classpath")
+                logger.info("Loaded $size properties from [$filename] on classpath. Keys: $keys")
             }
         }
     }
@@ -84,7 +84,7 @@ private fun fromFile(file: File): Properties =
     Properties().apply {
         if (file.exists()) {
             file.reader().use(::load)
-            logger.info("Loaded $size properties from [${file.path}] in working directory")
+            logger.info("Loaded $size properties from [${file.path}] in working directory. Keys: $keys")
         } else {
             logger.info("File [${file.path}] not found in working directory - no properties loaded")
         }
