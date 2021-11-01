@@ -1,5 +1,7 @@
 # liflig-properties
 
+Wrapper of `java.util.Properties`, written in Kotlin. Provides type- and null-safe extension methods to `Properties`.
+
 This library is currently only distributed in Liflig
 internal repositories.
 
