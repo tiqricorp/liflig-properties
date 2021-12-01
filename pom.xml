@@ -68,19 +68,6 @@
       <groupId>software.amazon.awssdk</groupId>
       <artifactId>secretsmanager</artifactId>
       <version>${aws-sdk.version}</version>
-
-      <exclusions>
-        <exclusion>
-          <!-- It has vulnerabilities, and is unused in this project. -->
-          <groupId>software.amazon.awssdk</groupId>
-          <artifactId>netty-nio-client</artifactId>
-        </exclusion>
-        <exclusion>
-          <!-- It has vulnerabilities, and is unused in this project. -->
-          <groupId>software.amazon.awssdk</groupId>
-          <artifactId>apache-client</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/software.amazon.awssdk/ssm -->
@@ -88,19 +75,6 @@
       <groupId>software.amazon.awssdk</groupId>
       <artifactId>ssm</artifactId>
       <version>${aws-sdk.version}</version>
-
-      <exclusions>
-        <exclusion>
-          <!-- It has vulnerabilities, and is unused in this project. -->
-          <groupId>software.amazon.awssdk</groupId>
-          <artifactId>netty-nio-client</artifactId>
-        </exclusion>
-        <exclusion>
-          <!-- It has vulnerabilities, and is unused in this project. -->
-          <groupId>software.amazon.awssdk</groupId>
-          <artifactId>apache-client</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
 
 
