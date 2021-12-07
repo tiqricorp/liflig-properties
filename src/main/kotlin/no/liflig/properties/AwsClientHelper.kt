@@ -1,5 +1,6 @@
 package no.liflig.properties
 
+import org.slf4j.LoggerFactory
 import software.amazon.awssdk.services.secretsmanager.SecretsManagerClient
 import software.amazon.awssdk.services.secretsmanager.model.DecryptionFailureException
 import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueRequest
@@ -16,12 +17,14 @@ import software.amazon.awssdk.services.ssm.model.ParameterNotFoundException
 import software.amazon.awssdk.services.ssm.model.ParameterVersionNotFoundException
 
 object AwsClientHelper {
+    private val logger = LoggerFactory.getLogger(AwsClientHelper::class.java)
     private val systemsManagement = SsmClient.builder()
         .build()
     private val secretsManager = SecretsManagerClient.builder()
         .build()
 
     fun getParametersByPath(path: String): Map<String, String> {
+        logger.debug("Loading parameters at path {}", path)
         val parameters = mutableMapOf<String, String>()
 
         val request = GetParametersByPathRequest.builder()
@@ -55,6 +58,7 @@ object AwsClientHelper {
     }
 
     fun getSecret(path: String): String {
+        logger.debug("Loading secret at path {}", path)
         val response: GetSecretValueResponse
 
         val request = GetSecretValueRequest.builder()
