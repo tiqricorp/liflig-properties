@@ -41,7 +41,7 @@
     <kotlin.version>1.6.10</kotlin.version>
     <kotlinx.serialization.version>1.3.2</kotlinx.serialization.version>
     <aws-sdk.version>2.17.92</aws-sdk.version>
-    <slf4j.version>1.7.33</slf4j.version>
+    <slf4j.version>1.7.35</slf4j.version>
 
     <junit.version>5.8.2</junit.version>
     <mockk.version>1.12.2</mockk.version>
