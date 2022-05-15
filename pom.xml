@@ -39,7 +39,7 @@
     <maven.compiler.target>{java.version}</maven.compiler.target>
 
     <kotlin.version>1.6.21</kotlin.version>
-    <kotlinx.serialization.version>1.3.2</kotlinx.serialization.version>
+    <kotlinx.serialization.version>1.3.3</kotlinx.serialization.version>
     <aws-sdk.version>2.17.121</aws-sdk.version>
     <slf4j.version>1.7.36</slf4j.version>
 
