@@ -1,14 +1,12 @@
 # liflig-properties
 
-Library for fetching properties from AWS Parameter Store and Secrets Manager, and type- and null-safe extension methods to `java.util.Properties` for Kotlin.
+Library for fetching properties from local files and AWS Parameter Store and Secrets Manager. This library also contains type- and null-safe extension methods to `java.util.Properties` for Kotlin.
 
-The path from which properties are loaded is specified in the environment variale `SSM_PREFIX`.
-Properties are loaded from `SSM_PREFIX/config/` and secrets are loaded from secret names specified in parameters with prefix `SSM_PREFIX/secrets/`.
+For properties loading order, see the documentation in the code https://github.com/capralifecycle/liflig-properties/blob/master/src/main/kotlin/no/liflig/properties/PropertiesLoader.kt#L11-L29
 
 `liflig-cdk` has built-in support for creating secrets and properties that `liflig-properties` can load.
 
-This library is currently only distributed in Liflig
-internal repositories.
+This library is currently only distributed in Liflig internal repositories.
 
 ## Contributing
 
