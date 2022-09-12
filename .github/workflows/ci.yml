@@ -1,4 +1,4 @@
-name: Publish lifling package to GitHub Packages
+name: Publish liflig-properties package to GitHub Packages
 on:
   push:
     branches:
