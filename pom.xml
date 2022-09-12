@@ -9,17 +9,11 @@
   <packaging>jar</packaging>
   <version>${revision}</version>
 
-  <scm>
-    <developerConnection>scm:git:https://github.com/capralifecycle/liflig-properties.git</developerConnection>
-    <connection>scm:git:https://github.com/capralifecycle/liflig-properties.git</connection>
-    <url>https://github.com/capralifecycle/liflig-properties</url>
-    <tag>HEAD</tag>
-  </scm>
-
   <distributionManagement>
     <repository>
-      <id>capra-releases</id>
-      <url>https://mvnrepo.capraconsulting.no/content/repositories/capra-releases</url>
+      <id>github</id>
+      <name>GitHub tiqricorp Apache Maven Packages</name>
+      <url>https://maven.pkg.github.com/tiqricorp/liflig-properties</url>
     </repository>
   </distributionManagement>
 
